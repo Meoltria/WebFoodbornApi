@@ -34,5 +34,10 @@ namespace WebFoodbornApi.Models
         public string FillUser { get; set; }
         public DateTime FillTime { get; set; }
         public string Status { get; set; }
+
+        public ICollection<InitialDiagnosis> InitialDiagnoses { get; set; }
+        public ICollection<PastMedicalHistory> PastMedicalHistories { get; set; }
+        public ICollection<Symptom> Symptoms { get; set; }
+        public ICollection<FoodInfo> FoodInfos { get; set; }
     }
 }
