@@ -43,6 +43,11 @@ namespace WebFoodbornApi.AutoMapper
             CreateMap<DictionaryCreateInput, Dictionary>();
             CreateMap<Dictionary, DictonaryUpdateInput>();
             CreateMap<Dictionary, DictionarySelectOutput>();
+
+            CreateMap<Patient, PatientOutput>();
+            CreateMap<PatientCreateInput, Patient>()
+                .ForMember(patient => patient.Guid, option => option.MapFrom(input => Guid.NewGuid().ToString("D")));
+            CreateMap<Patient, PatientUpdateInput>();
         }
     }
 }
