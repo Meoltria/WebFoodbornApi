@@ -37,7 +37,7 @@ namespace WebFoodbornApi.Dtos
     public class PatientQueryInput : IPageAndSortInputDto
     {
         public string OutpatientNo { get; set; }
-        public string Name { get; set; }
+        public string PatientName { get; set; }
     }
 
     public class PatientCreateInput
