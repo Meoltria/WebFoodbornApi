@@ -34,7 +34,7 @@ namespace WebFoodbornApi
 
         public IConfiguration Configuration { get; }
         private JWTTokenOptions tokenOptions;
-        private OppointmentApiOptions apiOptions;
+        private FoodBornApiOptions apiOptions;
 
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
@@ -128,14 +128,14 @@ namespace WebFoodbornApi
             //鉴权规则设置
 
             //第三方Api调用相关
-            apiOptions = new OppointmentApiOptions()
+            apiOptions = new FoodBornApiOptions()
             {
                 HospitalId = Configuration.GetSection("FoodbornApi")["HospitalId"].ToString(),
                 HospitalName = Configuration.GetSection("FoodbornApi")["HospitalName"].ToString(),
                 Version = Configuration.GetSection("FoodbornApi")["Version"].ToString(),
                 SecretKey = Configuration.GetSection("FoodbornApi")["SecretKey"].ToString(),
             };
-            services.AddSingleton<OppointmentApiOptions>(apiOptions);
+            services.AddSingleton<FoodBornApiOptions>(apiOptions);
 
             services.AddMvc().SetCompatibilityVersion(CompatibilityVersion.Version_2_2);
         }

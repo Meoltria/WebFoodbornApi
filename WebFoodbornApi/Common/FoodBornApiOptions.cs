@@ -5,7 +5,7 @@ using System.Threading.Tasks;
 
 namespace WebFoodbornApi.Common
 {
-    public class OppointmentApiOptions
+    public class FoodBornApiOptions
     {
         public string HospitalId { get; set; }
         public string HospitalName { get; set; }
