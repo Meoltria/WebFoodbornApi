@@ -46,7 +46,7 @@ namespace WebFoodbornApi.AutoMapper
 
             CreateMap<Patient, PatientOutput>();
             CreateMap<PatientCreateInput, Patient>()
-                .ForMember(patient => patient.Guid, option => option.MapFrom(input => Guid.NewGuid().ToString("D")));
+                .ForMember(patient => patient.Guid, option => option.MapFrom(input => Guid.NewGuid().ToString("N")));
             CreateMap<Patient, PatientUpdateInput>();
 
             CreateMap<InitialDiagnosis, InitialDiagnosisOutput>();
