@@ -19,7 +19,7 @@ using WebFoodbornApi.Models;
 namespace WebFoodbornApi.Controllers
 {
     [Produces("application/json")]
-    [Route("api/v1/Patient")]
+    [Route("api/v1/Patients")]
     [Authorize]
     public class PatientController : Controller
     {
@@ -119,7 +119,7 @@ namespace WebFoodbornApi.Controllers
             dbContext.Patients.Add(patient);
             await dbContext.SaveChangesAsync();
 
-            return CreatedAtRoute("CreatePatient", new { id = patient.Id }, mapper.Map<PatientOutput>(patient));
+            return CreatedAtRoute("GetPatient", new { id = patient.Id }, mapper.Map<PatientOutput>(patient));
         }
         #endregion
 

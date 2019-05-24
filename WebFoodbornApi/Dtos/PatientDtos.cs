@@ -8,7 +8,7 @@ namespace WebFoodbornApi.Dtos
         public int Id { get; set; }
         public string Guid { get; set; }
         public string OutpatientNo { get; set; }
-        public string IsHospitalizationCod { get; set; }
+        public string IsHospitalizationCode { get; set; }
         public string IsHospitalizationName { get; set; }
         public string InpatientNo { get; set; }
         public string IsReviewCode { get; set; }
@@ -45,7 +45,7 @@ namespace WebFoodbornApi.Dtos
         [Required(ErrorMessage = "请输入患者门诊号")]
         public string OutpatientNo { get; set; }
         [Required(ErrorMessage = "请选择是否住院")]
-        public string IsHospitalizationCod { get; set; }
+        public string IsHospitalizationCode { get; set; }
         public string IsHospitalizationName { get; set; }
         public string InpatientNo { get; set; }
         [Required(ErrorMessage = "请选择是否复诊")]
@@ -91,7 +91,7 @@ namespace WebFoodbornApi.Dtos
         [Required(ErrorMessage = "请输入患者门诊号")]
         public string OutpatientNo { get; set; }
         [Required(ErrorMessage = "请选择是否住院")]
-        public string IsHospitalizationCod { get; set; }
+        public string IsHospitalizationCode { get; set; }
         public string IsHospitalizationName { get; set; }
         public string InpatientNo { get; set; }
         [Required(ErrorMessage = "请选择是否复诊")]

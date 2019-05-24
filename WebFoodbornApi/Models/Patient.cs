@@ -10,7 +10,7 @@ namespace WebFoodbornApi.Models
         public int Id { get; set; }
         public string Guid { get; set; }
         public string OutpatientNo { get; set; }
-        public string IsHospitalizationCod { get; set; }
+        public string IsHospitalizationCode { get; set; }
         public string IsHospitalizationName { get; set; }
         public string InpatientNo { get; set; }
         public string IsReviewCode { get; set; }
