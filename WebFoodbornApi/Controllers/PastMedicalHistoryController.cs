@@ -19,14 +19,14 @@ using WebFoodbornApi.Models;
 namespace WebFoodbornApi.Controllers
 {
     [Produces("application/json")]
-    [Route("api/v1/InitialDiagnoses")]
+    [Route("api/v1/PastMedicalHistories")]
     [Authorize]
-    public class InitialDiagnosisController : Controller
+    public class PastMedicalHistoryController : Controller
     {
         private readonly ApiContext dbContext;
         private readonly IMapper mapper;
 
-        public InitialDiagnosisController(ApiContext dbContext, IMapper mapper)
+        public PastMedicalHistoryController(ApiContext dbContext, IMapper mapper)
         {
             this.dbContext = dbContext;
             this.mapper = mapper;
@@ -34,85 +34,85 @@ namespace WebFoodbornApi.Controllers
 
         #region 基本操作
 
-        #region 获得初步诊断信息
+        #region 获得既往病史信息
         /// <summary>
-        /// 获得初步诊断信息
+        /// 获得既往病史信息
         /// </summary>
         /// <param name="id">Id</param>
         /// <returns></returns>
-        [HttpGet("{id}", Name = "GetInitialDiagnosis")]
-        [ProducesResponseType(typeof(InitialDiagnosisOutput), 200)]
+        [HttpGet("{id}", Name = "GetPastMedicalHistory")]
+        [ProducesResponseType(typeof(PastMedicalHistoryOutput), 200)]
         [ProducesResponseType(typeof(string), 404)]
         [ProducesResponseType(typeof(void), 500)]
-        public async Task<IActionResult> GetInitialDiagnosis([FromRoute]int id)
+        public async Task<IActionResult> GetPastMedicalHistory([FromRoute]int id)
         {
-            InitialDiagnosis initialDiagnosis = await dbContext.InitialDiagnoses
+            PastMedicalHistory pastMedicalHistory = await dbContext.PastMedicalHistories
                .FirstOrDefaultAsync(i => i.Id == id);
 
-            if (initialDiagnosis == null)
+            if (pastMedicalHistory == null)
             {
-                return NotFound(Json(new { Error = "该初步诊断不存在" }));
+                return NotFound(Json(new { Error = "该既往病史不存在" }));
             }
 
-            InitialDiagnosisOutput output = mapper.Map<InitialDiagnosisOutput>(initialDiagnosis);
+            PastMedicalHistoryOutput output = mapper.Map<PastMedicalHistoryOutput>(pastMedicalHistory);
 
             return new ObjectResult(output);
         }
 
         /// <summary>
-        /// 获得初步诊断
+        /// 既往病史
         /// </summary>
         /// <param name="patientId">patientId</param>
         /// <returns></returns>
-        [HttpGet("~/api/v1/InitialDiagnoses/PatientId/{patientId}")]
-        [ProducesResponseType(typeof(InitialDiagnosisOutput), 200)]
+        [HttpGet("~/api/v1/PastMedicalHistories/PatientId/{patientId}")]
+        [ProducesResponseType(typeof(PastMedicalHistoryOutput), 200)]
         [ProducesResponseType(typeof(string), 404)]
         [ProducesResponseType(typeof(void), 500)]
-        public async Task<IActionResult> GetInitialDiagnosisByPatientId([FromRoute]int patientId)
+        public async Task<IActionResult> GetPastMedicalHistoryByPatientId([FromRoute]int patientId)
         {
-            InitialDiagnosis initialDiagnosis = await dbContext.InitialDiagnoses
-               .FirstOrDefaultAsync(i => i.PatientId == patientId);
+            PastMedicalHistory pastMedicalHistory = await dbContext.PastMedicalHistories
+               .FirstOrDefaultAsync(p => p.PatientId == patientId);
 
-            if (initialDiagnosis == null)
+            if (pastMedicalHistory == null)
             {
-                return NotFound(Json(new { Error = "该患者未填写初步诊断" }));
+                return NotFound(Json(new { Error = "该患者未填写既往病史" }));
             }
 
-            InitialDiagnosisOutput output = mapper.Map<InitialDiagnosisOutput>(initialDiagnosis);
+            PastMedicalHistoryOutput output = mapper.Map<PastMedicalHistoryOutput>(pastMedicalHistory);
 
             return new ObjectResult(output);
         }
         #endregion
 
-        #region 创建初步诊断
+        #region 创建既往病史
         /// <summary>
-        /// 创建初步诊断
+        /// 创建既往病史
         /// </summary>
         /// <param name="input"></param>
         /// <returns></returns>
         [HttpPost]
         [ValidateModel]
-        [ProducesResponseType(typeof(InitialDiagnosisOutput), 201)]
+        [ProducesResponseType(typeof(PastMedicalHistoryOutput), 201)]
         [ProducesResponseType(typeof(ValidationError), 422)]
         [ProducesResponseType(typeof(void), 500)]
-        public async Task<IActionResult> CreateInitialDiagnosis([FromBody]InitialDiagnosisCreateInput input)
+        public async Task<IActionResult> CreatePastMedicalHistory([FromBody]PastMedicalHistoryCreateInput input)
         {
-            if (dbContext.InitialDiagnoses.Count(i => i.PatientId == input.PatientId) > 0)
+            if (dbContext.PastMedicalHistories.Count(p => p.PatientId == input.PatientId) > 0)
             {
-                return BadRequest(Json(new { Error = "患者已填写初步诊断" }));
+                return BadRequest(Json(new { Error = "患者已填写既往病史" }));
             }
 
-            var initialDiagnosis = mapper.Map<InitialDiagnosis>(input);
-            dbContext.InitialDiagnoses.Add(initialDiagnosis);
+            var pastMedicalHistory = mapper.Map<PastMedicalHistory>(input);
+            dbContext.PastMedicalHistories.Add(pastMedicalHistory);
             await dbContext.SaveChangesAsync();
 
-            return CreatedAtRoute("GetInitialDiagnosis", new { id = initialDiagnosis.Id }, mapper.Map<InitialDiagnosisOutput>(initialDiagnosis));
+            return CreatedAtRoute("GetPastMedicalHistory", new { id = pastMedicalHistory.Id }, mapper.Map<PastMedicalHistoryOutput>(pastMedicalHistory));
         }
         #endregion
 
-        #region 修改初步诊断信息
+        #region 修改既往病史
         /// <summary>
-        /// 修改初步诊断信息
+        /// 修改既往病史
         /// </summary>
         /// <param name="id"></param>
         /// <param name="input"></param>
@@ -124,19 +124,19 @@ namespace WebFoodbornApi.Controllers
         [ProducesResponseType(typeof(string), 404)]
         [ProducesResponseType(typeof(ValidationError), 422)]
         [ProducesResponseType(typeof(void), 500)]
-        public async Task<IActionResult> UpdateInitialDiagnosis([FromRoute]int id, [FromBody]InitialDiagnosisUpdateInput input)
+        public async Task<IActionResult> UpdatePastMedicalHistory([FromRoute]int id, [FromBody]PastMedicalHistoryUpdateInput input)
         {
             if (input.Id != id)
             {
                 return BadRequest(Json(new { Error = "请求参数错误" }));
             }
-            var initialDiagnosis = await dbContext.InitialDiagnoses.FirstOrDefaultAsync(p => p.Id == id);
-            if (initialDiagnosis == null)
+            var pastMedicalHistory = await dbContext.PastMedicalHistories.FirstOrDefaultAsync(p => p.Id == id);
+            if (pastMedicalHistory == null)
             {
-                return NotFound(Json(new { Error = "该初步诊断信息不存在" }));
+                return NotFound(Json(new { Error = "该既往病史信息不存在" }));
             }
 
-            dbContext.Entry(initialDiagnosis).CurrentValues.SetValues(input);
+            dbContext.Entry(pastMedicalHistory).CurrentValues.SetValues(input);
             await dbContext.SaveChangesAsync();
 
             return new NoContentResult();
