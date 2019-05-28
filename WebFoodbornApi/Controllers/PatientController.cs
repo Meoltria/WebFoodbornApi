@@ -95,6 +95,30 @@ namespace WebFoodbornApi.Controllers
 
             return new ObjectResult(output);
         }
+
+        /// <summary>
+        /// 获得用户信息
+        /// </summary>
+        /// <param name="outpatientNo">outpatientNo</param>
+        /// <returns></returns>
+        [HttpGet("~/api/v1/Patients/OutpatientNo/{outpatientNo}")]
+        [ProducesResponseType(typeof(PatientOutput), 200)]
+        [ProducesResponseType(typeof(string), 404)]
+        [ProducesResponseType(typeof(void), 500)]
+        public async Task<IActionResult> GetPatientByOutpatientNo([FromRoute]string outpatientNo)
+        {
+            Patient patient = await dbContext.Patients
+               .FirstOrDefaultAsync(p => p.OutpatientNo.Equals(outpatientNo));
+
+            if (patient == null)
+            {
+                return NotFound(Json(new { Error = "该患者不存在" }));
+            }
+
+            PatientOutput output = mapper.Map<PatientOutput>(patient);
+
+            return new ObjectResult(output);
+        }
         #endregion
 
         #region 创建患者
