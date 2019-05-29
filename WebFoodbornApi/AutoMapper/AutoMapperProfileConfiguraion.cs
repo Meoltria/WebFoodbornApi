@@ -60,6 +60,10 @@ namespace WebFoodbornApi.AutoMapper
             CreateMap<Symptom, SymptomOutput>();
             CreateMap<SymptomCreateInput, Symptom>();
             CreateMap<Symptom, SymptomUpdateInput>();
+
+            CreateMap<FoodInfo, FoodInfoOutput>();
+            CreateMap<FoodInfoCreateInput, FoodInfo>();
+            CreateMap<FoodInfo, FoodInfoUpdateInput>();
         }
     }
 }

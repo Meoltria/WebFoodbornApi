@@ -97,7 +97,7 @@ namespace WebFoodbornApi.Controllers
         }
 
         /// <summary>
-        /// 获得用户信息
+        /// 获得患者信息
         /// </summary>
         /// <param name="outpatientNo">outpatientNo</param>
         /// <returns></returns>

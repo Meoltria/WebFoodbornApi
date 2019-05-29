@@ -47,7 +47,7 @@ namespace WebFoodbornApi.Controllers
         public async Task<IActionResult> GetPastMedicalHistory([FromRoute]int id)
         {
             PastMedicalHistory pastMedicalHistory = await dbContext.PastMedicalHistories
-               .FirstOrDefaultAsync(i => i.Id == id);
+               .FirstOrDefaultAsync(p => p.Id == id);
 
             if (pastMedicalHistory == null)
             {
@@ -60,7 +60,7 @@ namespace WebFoodbornApi.Controllers
         }
 
         /// <summary>
-        /// 既往病史
+        /// 获得既往病史
         /// </summary>
         /// <param name="patientId">patientId</param>
         /// <returns></returns>
