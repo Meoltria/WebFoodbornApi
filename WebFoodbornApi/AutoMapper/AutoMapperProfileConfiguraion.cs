@@ -57,6 +57,9 @@ namespace WebFoodbornApi.AutoMapper
             CreateMap<PastMedicalHistoryCreateInput, PastMedicalHistory>();
             CreateMap<PastMedicalHistory, PastMedicalHistoryUpdateInput>();
 
+            CreateMap<Symptom, SymptomOutput>();
+            CreateMap<SymptomCreateInput, Symptom>();
+            CreateMap<Symptom, SymptomUpdateInput>();
         }
     }
 }
