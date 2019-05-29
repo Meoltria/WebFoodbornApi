@@ -137,9 +137,9 @@ namespace WebFoodbornApi.Controllers
         }
         #endregion
 
-        #region 更新患者信息
+        #region 更新暴露信息
         /// <summary>
-        /// 更新患者信息
+        /// 更新暴露信息
         /// </summary>
         /// <param name="id"></param>
         /// <param name="patchDoc"></param>
@@ -179,9 +179,9 @@ namespace WebFoodbornApi.Controllers
         }
         #endregion
 
-        #region 删除患者
+        #region 删除暴露信息
         /// <summary>
-        /// 删除患者
+        /// 删除暴露信息
         /// </summary>
         /// <param name="id">ID</param>
         /// <returns></returns>
