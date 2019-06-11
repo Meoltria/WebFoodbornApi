@@ -274,5 +274,9 @@ namespace WebFoodbornApi.Controllers
         #endregion
 
         #endregion
+
+        #region 患者信息上报
+
+        #endregion
     }
 }

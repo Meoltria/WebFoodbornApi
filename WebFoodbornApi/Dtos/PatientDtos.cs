@@ -23,6 +23,7 @@ namespace WebFoodbornApi.Dtos
         public string IsAntibioticCode { get; set; }
         public string IsAntibioticName { get; set; }
         public string AntibioticName { get; set; }
+        public string Phone { get; set; }
         public string ProvinceCityDistrict { get; set; }
         public string Address { get; set; }
         public string GuardianName { get; set; }
@@ -66,6 +67,8 @@ namespace WebFoodbornApi.Dtos
         public string IsAntibioticCode { get; set; }
         public string IsAntibioticName { get; set; }
         public string AntibioticName { get; set; }
+        [Required(ErrorMessage = "请输入联系电话")]
+        public string Phone { get; set; }
         [Required(ErrorMessage = "请输入省市区")]
         public string ProvinceCityDistrict { get; set; }
         [Required(ErrorMessage = "请输入详细地址")]
@@ -112,6 +115,8 @@ namespace WebFoodbornApi.Dtos
         public string IsAntibioticCode { get; set; }
         public string IsAntibioticName { get; set; }
         public string AntibioticName { get; set; }
+        [Required(ErrorMessage = "请输入联系电话")]
+        public string Phone { get; set; }
         [Required(ErrorMessage = "请输入省市区")]
         public string ProvinceCityDistrict { get; set; }
         [Required(ErrorMessage = "请输入详细地址")]

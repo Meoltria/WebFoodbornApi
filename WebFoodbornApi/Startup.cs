@@ -132,6 +132,7 @@ namespace WebFoodbornApi
             {
                 HospitalId = Configuration.GetSection("FoodbornApi")["HospitalId"].ToString(),
                 HospitalName = Configuration.GetSection("FoodbornApi")["HospitalName"].ToString(),
+                UserName= Configuration.GetSection("FoodbornApi")["UserName"].ToString(),
                 Version = Configuration.GetSection("FoodbornApi")["Version"].ToString(),
                 SecretKey = Configuration.GetSection("FoodbornApi")["SecretKey"].ToString(),
             };

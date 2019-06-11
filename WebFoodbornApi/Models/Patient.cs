@@ -25,6 +25,7 @@ namespace WebFoodbornApi.Models
         public string IsAntibioticCode { get; set; }
         public string IsAntibioticName { get; set; }
         public string AntibioticName { get; set; }
+        public string Phone { get; set; }
         public string ProvinceCityDistrict { get; set; }
         public string Address { get; set; }
         public string GuardianName { get; set; }
