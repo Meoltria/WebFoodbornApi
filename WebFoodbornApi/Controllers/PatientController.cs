@@ -287,7 +287,7 @@ namespace WebFoodbornApi.Controllers
         /// <returns></returns>
         [HttpPost("UploadMedicalRecord")]
         [ValidateModel]
-        [ProducesResponseType(typeof(UploadMedicalRecordOutput), 201)]
+        [ProducesResponseType(typeof(UploadMedicalRecordOutput), 200)]
         [ProducesResponseType(typeof(ValidationError), 422)]
         [ProducesResponseType(typeof(void), 500)]
         public async Task<IActionResult> UploadMedicalRecord([FromBody]UploadMedicalRecordInput input)
