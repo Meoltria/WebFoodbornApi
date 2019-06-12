@@ -25,11 +25,13 @@ namespace WebFoodbornApi.Controllers
     {
         private readonly ApiContext dbContext;
         private readonly IMapper mapper;
+        private readonly FoodBornApiOptions apiOptions;
 
-        public PatientController(ApiContext dbContext, IMapper mapper)
+        public PatientController(ApiContext dbContext, IMapper mapper, FoodBornApiOptions apiOptions)
         {
             this.dbContext = dbContext;
             this.mapper = mapper;
+            this.apiOptions = apiOptions;
         }
 
         #region 患者基本操作
@@ -276,6 +278,59 @@ namespace WebFoodbornApi.Controllers
         #endregion
 
         #region 患者信息上报
+
+        #region 病历上报
+        /// <summary>
+        /// 病历上报
+        /// </summary>
+        /// <param name="input"></param>
+        /// <returns></returns>
+        [HttpPost("UploadMedicalRecord")]
+        [ValidateModel]
+        [ProducesResponseType(typeof(UploadMedicalRecordOutput), 201)]
+        [ProducesResponseType(typeof(ValidationError), 422)]
+        [ProducesResponseType(typeof(void), 500)]
+        public async Task<IActionResult> UploadMedicalRecord([FromBody]UploadMedicalRecordInput input)
+        {
+            Patient patient = await dbContext.Patients.FirstOrDefaultAsync(p => p.Id == input.PatientId);
+            if (patient == null)
+            {
+                return BadRequest(Json(new { Error = "不存在该患者" }));
+            }
+
+            InitialDiagnosis initialDiagnosis = await dbContext.InitialDiagnoses.FirstOrDefaultAsync(i => i.PatientId == patient.Id);
+            if (initialDiagnosis == null)
+            {
+                return BadRequest(Json(new { Error = "该患者未填写初步诊断" }));
+            }
+
+            PastMedicalHistory pastMedicalHistory = await dbContext.PastMedicalHistories.FirstOrDefaultAsync(p => p.PatientId == patient.Id);
+            if (pastMedicalHistory == null)
+            {
+                return BadRequest(Json(new { Error = "该患者未填写既往史" }));
+            }
+
+            Symptom symptom = await dbContext.Symptoms.FirstOrDefaultAsync(s => s.PatientId == patient.Id);
+            if (symptom == null)
+            {
+                return BadRequest(Json(new { Error = "该患者未填写症状体征信息" }));
+            }
+
+            List<FoodInfo> foodInfos = await dbContext.FoodInfos.Where(f => f.PatientId == patient.Id).ToListAsync();
+
+            XmlHelper xmlHelper = new XmlHelper();
+
+            string requestXml = xmlHelper.ConvertToXml(input.OperationType, apiOptions, patient, initialDiagnosis, pastMedicalHistory, symptom, foodInfos);
+
+            UploadMedicalRecordOutput output = new UploadMedicalRecordOutput
+            {
+                Code = 1,
+                Msg = "操作成功！"
+            };
+
+            return new ObjectResult(output);
+        }
+        #endregion
 
         #endregion
     }

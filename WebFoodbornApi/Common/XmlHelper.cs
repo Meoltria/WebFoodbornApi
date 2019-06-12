@@ -9,7 +9,7 @@ namespace WebFoodbornApi.Common
 {
     public class XmlHelper
     {
-        public string ConvertToXml(string operationType, FoodBornApiOptions apiOptions, Patient patient, InitialDiagnosis initialDiagnosis, PastMedicalHistory pastMedicalHistory, Symptom symptom, List<FoodInfo> foodInfos)
+        public string ConvertToXml(int operationType, FoodBornApiOptions apiOptions, Patient patient, InitialDiagnosis initialDiagnosis, PastMedicalHistory pastMedicalHistory, Symptom symptom, List<FoodInfo> foodInfos)
         {
             XDocument xDoc = new XDocument
             (
@@ -18,7 +18,7 @@ namespace WebFoodbornApi.Common
                 (
                     "接口",
                     new XElement("令牌", apiOptions.SecretKey),
-                    new XElement("数据类型", "3"),
+                    new XElement("数据类型", 3),
                     new XElement("操作类型", operationType),
                     new XElement("操作单位", apiOptions.HospitalName),
                     new XElement("操作用户", apiOptions.UserName),

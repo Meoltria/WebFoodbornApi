@@ -133,4 +133,16 @@ namespace WebFoodbornApi.Dtos
         public DateTime FillTime { get; set; }
         public string Status { get; set; }
     }
+
+    public class UploadMedicalRecordInput
+    {
+        public int PatientId { get; set; }
+        public int OperationType { get; set; }
+    }
+
+    public class UploadMedicalRecordOutput
+    {
+        public int Code { get; set; }
+        public string Msg { get; set; }
+    }
 }
