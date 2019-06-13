@@ -15,6 +15,7 @@ using WebFoodbornApi.Dtos;
 using WebFoodbornApi.Common;
 using WebFoodbornApi.Filters;
 using WebFoodbornApi.Models;
+using FoodBornWebService;
 
 namespace WebFoodbornApi.Controllers
 {
@@ -321,6 +322,9 @@ namespace WebFoodbornApi.Controllers
             XmlHelper xmlHelper = new XmlHelper();
 
             string requestXml = xmlHelper.ConvertToXml(input.OperationType, apiOptions, patient, initialDiagnosis, pastMedicalHistory, symptom, foodInfos);
+
+            ReportServiceClient reportService = new ReportServiceClient();
+            string responseXml = await reportService.WEBRequestAsync(requestXml);
 
             UploadMedicalRecordOutput output = new UploadMedicalRecordOutput
             {
