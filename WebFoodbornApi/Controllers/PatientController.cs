@@ -324,7 +324,8 @@ namespace WebFoodbornApi.Controllers
             string requestXml = xmlHelper.ConvertToXml(input.OperationType, apiOptions, patient, initialDiagnosis, pastMedicalHistory, symptom, foodInfos);
 
             ReportServiceClient reportService = new ReportServiceClient();
-            string responseXml = await reportService.WEBRequestAsync(requestXml);
+            string responseString = await reportService.WEBRequestAsync(Encrypt.Base64Encode(requestXml));
+            string responseXmlString = Encrypt.Base64Decode(responseString);
 
             UploadMedicalRecordOutput output = new UploadMedicalRecordOutput
             {
