@@ -252,8 +252,8 @@ namespace WebFoodbornApi.Common
                                 new XElement("食品名称", foodInfo.FoodName),
                                 new XElement("食品分类", foodInfo.FoodType),
                                 new XElement("加工或包装方式", foodInfo.FoodPackaging),
-                                new XElement("食品品牌", foodInfo.FoodBrand),
-                                new XElement("生产厂家", foodInfo.Manufacturer),
+                                string.IsNullOrEmpty(foodInfo.FoodBrand) ? null : new XElement("食品品牌", foodInfo.FoodBrand),
+                                string.IsNullOrEmpty(foodInfo.Manufacturer) ? null : new XElement("生产厂家", foodInfo.Manufacturer),
                                 new XElement("进食场所", foodInfo.EatingPlace),
                                 new XElement("购买场所", foodInfo.PurchasePlace),
                                 new XElement
