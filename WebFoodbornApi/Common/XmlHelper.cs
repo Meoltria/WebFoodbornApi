@@ -24,30 +24,30 @@ namespace WebFoodbornApi.Common
                     new XElement("操作用户", apiOptions.UserName),
                     new XElement
                     (
-                        "病历",
+                        "病例",
                         new XAttribute("Guid", patient.Guid),
                         new XElement
                         (
                             "填报信息",
                             new XElement("填表人", patient.FillUser),
                             new XElement("接诊医生", patient.ReceivingDoctor),
-                            new XElement("填表日期", patient.FillTime.ToString("yyyy-MM-dd hh:mm:ss")),
+                            new XElement("填表日期", patient.FillTime.ToString("yyyy-MM-dd HH:mm:ss")),
                             new XElement("医疗机构", apiOptions.HospitalName)
                         ),
                         new XElement
                         (
-                            "病历基本信息",
-                            new XElement("发病时间", patient.IllnessTime.ToString("yyyy-MM-dd hh:mm:ss")),
-                            new XElement("就诊时间", patient.TreatmentTime.ToString("yyyy-MM-dd hh:mm:ss")),
+                            "病例基本信息",
+                            new XElement("发病时间", patient.IllnessTime.ToString("yyyy-MM-dd HH:mm:ss")),
+                            new XElement("就诊时间", patient.TreatmentTime.ToString("yyyy-MM-dd HH:mm:ss")),
                             new XElement("门诊号", patient.OutpatientNo),
                             new XElement("是否复诊", patient.IsReviewName),
                             new XElement("是否住院", patient.IsHospitalizationName),
-                            new XElement("住院号", patient.InpatientNo),
+                            patient.IsHospitalizationCode.Equals("1") ? new XElement("住院号", patient.InpatientNo) : null,
                             new XElement("患者姓名", patient.PatientName),
                             new XElement("监护人姓名", patient.GuardianName),
                             new XElement("患者性别", patient.GenderName),
                             new XElement("患者职业", patient.ProfessionName),
-                            new XElement("身份证号", patient.IdCard),
+                            string.IsNullOrEmpty(patient.IdCard) ? null : new XElement("身份证号", patient.IdCard),
                             new XElement("出生日期", string.IsNullOrEmpty(patient.Birthday) ? "" : patient.Birthday),
                             new XElement("联系电话", patient.Phone),
                             new XElement("患者属于", "本县区"),
@@ -60,15 +60,15 @@ namespace WebFoodbornApi.Common
                         ),
                         new XElement
                         (
-                            "主要症状及体征",
+                            "主要症状与体征",
                             new XElement
                             (
-                                "全身症状及体征",
+                                "全身症状与体征",
                                 symptom.Fever ? new XElement
                                 (
                                     "发热",
                                     new XElement("度数", symptom.FeverDegree)
-                                ) : new XElement("发热"),
+                                ) : null,
                                 new XElement("面色潮红", symptom.FacialFlush ? "是" : "否"),
                                 new XElement("面色苍白", symptom.Pale ? "是" : "否"),
                                 new XElement("发绀", symptom.Hairpin ? "是" : "否"),
@@ -94,7 +94,7 @@ namespace WebFoodbornApi.Common
                                 (
                                     "其他",
                                     new XElement("名称", symptom.SignsOtherInfo)
-                                ) : new XElement("其他")
+                                ) : null
                             ),
                             new XElement
                             (
@@ -104,7 +104,7 @@ namespace WebFoodbornApi.Common
                                 (
                                     "呕吐",
                                     new XElement("次数", symptom.VomitingCount)
-                                ) : new XElement("呕吐"),
+                                ) : null,
                                 new XElement("腹痛", symptom.StomachAche ? "是" : "否"),
                                 symptom.Diarrhea ? new XElement
                                 (
@@ -118,7 +118,7 @@ namespace WebFoodbornApi.Common
                                 (
                                     "其他",
                                     new XElement("名称", symptom.DigestiveOtherInfo)
-                                ) : new XElement("其他")
+                                ) : null
                             ),
                             new XElement
                             (
@@ -130,7 +130,7 @@ namespace WebFoodbornApi.Common
                                 (
                                     "其他",
                                     new XElement("名称", symptom.RespiratoryOtherInfo)
-                                ) : new XElement("其他")
+                                ) : null
                             ),
                             new XElement
                             (
@@ -143,7 +143,7 @@ namespace WebFoodbornApi.Common
                                 (
                                     "其他",
                                     new XElement("名称", symptom.CardiovascularOtherInfo)
-                                ) : new XElement("其他")
+                                ) : null
                             ),
                             new XElement
                             (
@@ -156,7 +156,7 @@ namespace WebFoodbornApi.Common
                                 (
                                     "其他",
                                     new XElement("名称", symptom.UrinaryOtherInfo)
-                                ) : new XElement("其他")
+                                ) : null
                             ),
                             new XElement
                             (
@@ -180,13 +180,13 @@ namespace WebFoodbornApi.Common
                                 (
                                     "瞳孔异常",
                                     new XElement("状态", symptom.PupilStatus)
-                                ) : new XElement("瞳孔异常"),
+                                ) : null,
                                 new XElement("针刺感", symptom.Acupuncture ? "是" : "否"),
                                 symptom.Nerveother ? new XElement
                                 (
                                     "其他",
                                     new XElement("名称", symptom.NerveOtherInfo)
-                                ) : new XElement("其他")
+                                ) : null
                             ),
                             new XElement
                             (
@@ -200,7 +200,7 @@ namespace WebFoodbornApi.Common
                                 (
                                     "其他",
                                     new XElement("名称", symptom.SkinOtherInfo)
-                                ) : new XElement("其他")
+                                ) : null
                             )
                         ),
                         new XElement
@@ -214,18 +214,18 @@ namespace WebFoodbornApi.Common
                             new XElement("肉毒中毒", initialDiagnosis.Botulism ? "是" : "否"),
                             new XElement("亚硝酸盐中毒", initialDiagnosis.NitritePoisoning ? "是" : "否"),
                             new XElement("横纹肌溶解综合征", initialDiagnosis.RhabdomyolysisSyndrome ? "是" : "否"),
-                            new XElement("贝类毒素中毒", initialDiagnosis.ShellfishToxinPoisoning ? "是" : "否"),
+                            //new XElement("贝类毒素中毒", initialDiagnosis.ShellfishToxinPoisoning ? "是" : "否"),
                             initialDiagnosis.Other ? new XElement
                             (
                                 "其他",
                                 new XElement("名称", initialDiagnosis.OtherInfo)
-                            ) : new XElement("其他")
+                            ) : null
                         ),
                         new XElement
                         (
                             "抗生素",
                             new XElement("是否使用抗生素", patient.IsAntibioticName),
-                            new XElement("抗生素名称", patient.AntibioticName)
+                            patient.IsAntibioticName.Equals("是") ? new XElement("抗生素名称", patient.AntibioticName) : null
                         ),
                         new XElement
                         (
@@ -235,13 +235,12 @@ namespace WebFoodbornApi.Common
                             new XElement("消化道溃疡", pastMedicalHistory.GastrointestinalUlcer ? "是" : "否"),
                             new XElement("消化道肿瘤", pastMedicalHistory.GastrointestinalCancer ? "是" : "否"),
                             new XElement("肠易激综合征", pastMedicalHistory.IrritableBowelSyndrome ? "是" : "否"),
-                            new XElement("脑膜炎", pastMedicalHistory.Meningitis ? "是" : "否"),
-                            new XElement("脑肿瘤", pastMedicalHistory.BrainTumor ? "是" : "否"),
+                            new XElement("脑膜炎脑肿瘤等", pastMedicalHistory.Meningitis ? "是" : "否"),
                             pastMedicalHistory.Other ? new XElement
                             (
                                 "其他",
                                 new XElement("名称", pastMedicalHistory.OtherInfo)
-                            ) : new XElement("其他")
+                            ) : null
                         ),
                         new XElement
                         (
@@ -272,13 +271,33 @@ namespace WebFoodbornApi.Common
                                     new XElement("详细地址", foodInfo.PurchaseAddress)
                                 ),
                                 new XElement("进食人数", foodInfo.EatingCounts),
-                                new XElement("进食时间", foodInfo.EatingTime.ToString("yyyy-MM-dd hh:mm:ss")),
+                                new XElement("进食时间", foodInfo.EatingTime.ToString("yyyy-MM-dd HH:mm:ss")),
                                 new XElement("他人是否发病", foodInfo.IsOtherPeople)
                             )
                         )
                     )
                 )
             );
+
+            return xDoc.ToString();
+        }
+
+        public string ConvertToXml(int operationType, FoodBornApiOptions apiOptions, Patient patient)
+        {
+            XDocument xDoc = new XDocument
+            (
+                new XDeclaration("1.0", "utf-8", "yes"),
+                new XElement
+                (
+                    "接口",
+                    new XElement("令牌", apiOptions.SecretKey),
+                    new XElement("数据类型", 3),
+                    new XElement("操作类型", operationType),
+                    new XElement("操作单位", apiOptions.HospitalName),
+                    new XElement("操作用户", apiOptions.UserName),
+                    new XElement("病例", patient.Guid)
+                )
+             );
 
             return xDoc.ToString();
         }

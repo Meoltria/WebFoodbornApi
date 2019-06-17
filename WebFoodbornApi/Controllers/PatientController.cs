@@ -16,6 +16,9 @@ using WebFoodbornApi.Common;
 using WebFoodbornApi.Filters;
 using WebFoodbornApi.Models;
 using FoodBornWebService;
+using System.Xml;
+using System.IO;
+using System.Xml.Linq;
 
 namespace WebFoodbornApi.Controllers
 {
@@ -321,17 +324,41 @@ namespace WebFoodbornApi.Controllers
 
             XmlHelper xmlHelper = new XmlHelper();
 
-            string requestXml = xmlHelper.ConvertToXml(input.OperationType, apiOptions, patient, initialDiagnosis, pastMedicalHistory, symptom, foodInfos);
+            string requestXml = "";
+            if (input.OperationType == 3)
+            {
+                requestXml = xmlHelper.ConvertToXml(input.OperationType, apiOptions, patient);
+            }
+            else
+            {
+                requestXml = xmlHelper.ConvertToXml(input.OperationType, apiOptions, patient, initialDiagnosis, pastMedicalHistory, symptom, foodInfos);
+            }
 
             ReportServiceClient reportService = new ReportServiceClient();
             string responseString = await reportService.WEBRequestAsync(Encrypt.Base64Encode(requestXml));
             string responseXmlString = Encrypt.Base64Decode(responseString);
 
+            XmlReader xmlReader = XmlReader.Create(new StringReader(responseXmlString));
+            XDocument xdoc = XDocument.Load(xmlReader);
+
             UploadMedicalRecordOutput output = new UploadMedicalRecordOutput
             {
-                Code = 1,
-                Msg = "操作成功！"
+                Code = Convert.ToInt32(xdoc.Element("接口").Element("操作状态").Value),
+                Msg = xdoc.Element("接口").Element("状态描述").Value
             };
+
+            if (input.OperationType == 1 && output.Code == 1)
+            {
+                patient.Status = "已上传";
+            }
+
+            if (input.OperationType == 3 && output.Code == 1)
+            {
+                patient.Status = "正常";
+            }
+
+            dbContext.Patients.Update(patient);
+            dbContext.SaveChanges();
 
             return new ObjectResult(output);
         }
