@@ -42,7 +42,7 @@ namespace WebFoodbornApi.Common
                             new XElement("门诊号", patient.OutpatientNo),
                             new XElement("是否复诊", patient.IsReviewName),
                             new XElement("是否住院", patient.IsHospitalizationName),
-                            patient.IsHospitalizationCode.Equals("1") ? new XElement("住院号", patient.InpatientNo) : null,
+                            string.IsNullOrEmpty(patient.InpatientNo) ? null : new XElement("住院号", patient.InpatientNo),
                             new XElement("患者姓名", patient.PatientName),
                             string.IsNullOrEmpty(patient.GuardianName) ? null : new XElement("监护人姓名", patient.GuardianName),
                             new XElement("患者性别", patient.GenderName),
