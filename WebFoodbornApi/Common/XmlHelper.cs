@@ -48,7 +48,7 @@ namespace WebFoodbornApi.Common
                             new XElement("患者性别", patient.GenderName),
                             new XElement("患者职业", patient.ProfessionName),
                             string.IsNullOrEmpty(patient.IdCard) ? null : new XElement("身份证号", patient.IdCard),
-                            new XElement("出生日期", string.IsNullOrEmpty(patient.Birthday) ? "" : patient.Birthday),
+                            new XElement("出生日期", patient.Birthday),
                             new XElement("联系电话", patient.Phone),
                             new XElement("患者属于", "本县区"),
                             new XElement
@@ -111,7 +111,7 @@ namespace WebFoodbornApi.Common
                                     "腹泻性状",
                                     new XElement("性状", symptom.DiarrheaTraits),
                                     new XElement("次数", symptom.DiarrheaCount)
-                                ) : new XElement("腹泻性状"),
+                                ) : null,
                                 new XElement("便秘", symptom.Constipation ? "是" : "否"),
                                 new XElement("里急后重", symptom.HeavyAndHeavy ? "是" : "否"),
                                 symptom.DigestiveOther ? new XElement
