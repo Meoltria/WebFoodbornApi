@@ -135,7 +135,7 @@ namespace FoodBornWebService
         {
             if ((endpointConfiguration == EndpointConfiguration.BasicHttpBinding_ReportService))
             {
-                return new System.ServiceModel.EndpointAddress("http://59.110.44.121:88/ReportService.svc");
+                return new System.ServiceModel.EndpointAddress("http://111.203.7.140/ReportService.svc");
             }
             throw new System.InvalidOperationException(string.Format("找不到名称为“{0}”的终结点。", endpointConfiguration));
         }

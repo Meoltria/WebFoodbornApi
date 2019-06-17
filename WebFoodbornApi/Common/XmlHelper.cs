@@ -44,7 +44,7 @@ namespace WebFoodbornApi.Common
                             new XElement("是否住院", patient.IsHospitalizationName),
                             patient.IsHospitalizationCode.Equals("1") ? new XElement("住院号", patient.InpatientNo) : null,
                             new XElement("患者姓名", patient.PatientName),
-                            new XElement("监护人姓名", patient.GuardianName),
+                            string.IsNullOrEmpty(patient.GuardianName) ? null : new XElement("监护人姓名", patient.GuardianName),
                             new XElement("患者性别", patient.GenderName),
                             new XElement("患者职业", patient.ProfessionName),
                             string.IsNullOrEmpty(patient.IdCard) ? null : new XElement("身份证号", patient.IdCard),
