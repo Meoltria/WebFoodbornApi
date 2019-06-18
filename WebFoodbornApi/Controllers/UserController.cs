@@ -272,7 +272,7 @@ namespace WebFoodbornApi.Controllers
         /// </summary>
         /// <param name="input"></param>
         /// <returns></returns>
-        [HttpPut("/api/v1/PassWord")]
+        [HttpPut("/api/v1/Users/PassWord")]
         [Authorize]
         [ProducesResponseType(typeof(void), 204)]
         [ProducesResponseType(typeof(string), 400)]
