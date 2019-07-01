@@ -126,6 +126,7 @@ namespace FoodBornWebService
                 result.ReaderQuotas = System.Xml.XmlDictionaryReaderQuotas.Max;
                 result.MaxReceivedMessageSize = int.MaxValue;
                 result.AllowCookies = true;
+                result.Security.Mode = System.ServiceModel.BasicHttpSecurityMode.Transport;
                 return result;
             }
             throw new System.InvalidOperationException(string.Format("找不到名称为“{0}”的终结点。", endpointConfiguration));
@@ -135,7 +136,7 @@ namespace FoodBornWebService
         {
             if ((endpointConfiguration == EndpointConfiguration.BasicHttpBinding_ReportService))
             {
-                return new System.ServiceModel.EndpointAddress("http://111.203.7.140/ReportService.svc");
+                return new System.ServiceModel.EndpointAddress("https://foodnet.cfsa.net.cn/ReportService.svc");
             }
             throw new System.InvalidOperationException(string.Format("找不到名称为“{0}”的终结点。", endpointConfiguration));
         }

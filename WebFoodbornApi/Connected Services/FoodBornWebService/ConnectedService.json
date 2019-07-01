@@ -5,7 +5,7 @@
     "Uri": "https://go.microsoft.com/fwlink/?linkid=858517"
   },
   "ExtendedData": {
-    "Uri": "http://111.203.7.140/reportservice.svc",
+    "Uri": "https://foodnet.cfsa.net.cn/reportservice.svc",
     "Namespace": "FoodBornWebService",
     "SelectedAccessLevelForGeneratedClass": "Public",
     "GenerateMessageContract": false,
