@@ -69,27 +69,27 @@ namespace WebFoodbornApi.Common
                                     "发热",
                                     new XElement("度数", symptom.FeverDegree)
                                 ) : null,
-                                new XElement("面色潮红", symptom.FacialFlush ? "是" : "否"),
-                                new XElement("面色苍白", symptom.Pale ? "是" : "否"),
-                                new XElement("发绀", symptom.Hairpin ? "是" : "否"),
-                                new XElement("脱水", symptom.Dehydration ? "是" : "否"),
-                                new XElement("口渴", symptom.Thirsty ? "是" : "否"),
-                                new XElement("浮肿", symptom.Puffiness ? "是" : "否"),
-                                new XElement("体重下降", symptom.WeightLoss ? "是" : "否"),
-                                new XElement("寒战", symptom.Chill ? "是" : "否"),
-                                new XElement("乏力", symptom.Weak ? "是" : "否"),
-                                new XElement("贫血", symptom.Anemia ? "是" : "否"),
-                                new XElement("肿胀", symptom.Swollen ? "是" : "否"),
-                                new XElement("失眠", symptom.Insomnia ? "是" : "否"),
-                                new XElement("畏光", symptom.Photophobia ? "是" : "否"),
-                                new XElement("口有糊味", symptom.Mouthly ? "是" : "否"),
-                                new XElement("金属味", symptom.Metallic ? "是" : "否"),
-                                new XElement("肥皂咸味", symptom.SoapSalty ? "是" : "否"),
-                                new XElement("唾液过多", symptom.ExcessiveSaliva ? "是" : "否"),
-                                new XElement("足腕下垂", symptom.FootWristPendant ? "是" : "否"),
-                                new XElement("色素沉着", symptom.Pigmentation ? "是" : "否"),
-                                new XElement("脱皮", symptom.Peeling ? "是" : "否"),
-                                new XElement("指甲出现白带", symptom.NailBand ? "是" : "否"),
+                                symptom.FacialFlush ? new XElement("面色潮红", "是") : null,
+                                symptom.Pale ? new XElement("面色苍白", "是") : null,
+                                symptom.Hairpin ? new XElement("发绀", "是") : null,
+                                symptom.Dehydration ? new XElement("脱水", "是") : null,
+                                symptom.Thirsty ? new XElement("口渴", "是") : null,
+                                symptom.Puffiness ? new XElement("浮肿", "是") : null,
+                                symptom.WeightLoss ? new XElement("体重下降", "是") : null,
+                                symptom.Chill ? new XElement("寒战", "是") : null,
+                                symptom.Weak ? new XElement("乏力", "是") : null,
+                                symptom.Anemia ? new XElement("贫血", "是") : null,
+                                symptom.Swollen ? new XElement("肿胀", "是") : null,
+                                symptom.Insomnia ? new XElement("失眠", "是") : null,
+                                symptom.Photophobia ? new XElement("畏光", "是") : null,
+                                symptom.Mouthly ? new XElement("口有糊味", "是") : null,
+                                symptom.Metallic ? new XElement("金属味", "是") : null,
+                                symptom.SoapSalty ? new XElement("肥皂咸味", "是") : null,
+                                symptom.ExcessiveSaliva ? new XElement("唾液过多", "是") : null,
+                                symptom.FootWristPendant ? new XElement("足腕下垂", "是") : null,
+                                symptom.Pigmentation ? new XElement("色素沉着", "是") : null,
+                                symptom.Peeling ? new XElement("脱皮", "是") : null,
+                                symptom.NailBand ? new XElement("指甲出现白带", "是") : null,
                                 symptom.SignsOther ? new XElement
                                 (
                                     "其他",
@@ -99,21 +99,21 @@ namespace WebFoodbornApi.Common
                             new XElement
                             (
                                 "消化系统",
-                                new XElement("恶心", symptom.Disgusting ? "是" : "否"),
+                                symptom.Disgusting ? new XElement("恶心", "是") : null,
                                 symptom.Vomiting ? new XElement
                                 (
                                     "呕吐",
                                     new XElement("次数", symptom.VomitingCount)
                                 ) : null,
-                                new XElement("腹痛", symptom.StomachAche ? "是" : "否"),
+                                symptom.StomachAche ? new XElement("腹痛", "是") : null,
                                 symptom.Diarrhea ? new XElement
                                 (
                                     "腹泻性状",
                                     new XElement("性状", symptom.DiarrheaTraits),
                                     new XElement("次数", symptom.DiarrheaCount)
                                 ) : null,
-                                new XElement("便秘", symptom.Constipation ? "是" : "否"),
-                                new XElement("里急后重", symptom.HeavyAndHeavy ? "是" : "否"),
+                                symptom.Constipation ? new XElement("便秘", "是") : null,
+                                symptom.HeavyAndHeavy ? new XElement("里急后重", "是") : null,
                                 symptom.DigestiveOther ? new XElement
                                 (
                                     "其他",
@@ -123,9 +123,9 @@ namespace WebFoodbornApi.Common
                             new XElement
                             (
                                 "呼吸系统",
-                                new XElement("呼吸短促", symptom.ShortnessOfBreath ? "是" : "否"),
-                                new XElement("咯血", symptom.Hemoptysis ? "是" : "否"),
-                                new XElement("呼吸困难", symptom.DifficultyBreathing ? "是" : "否"),
+                                symptom.ShortnessOfBreath ? new XElement("呼吸短促", "是") : null,
+                                symptom.Hemoptysis ? new XElement("咯血", "是") : null,
+                                symptom.DifficultyBreathing ? new XElement("呼吸困难", "是") : null,
                                 symptom.RespiratoryOther ? new XElement
                                 (
                                     "其他",
@@ -135,10 +135,10 @@ namespace WebFoodbornApi.Common
                             new XElement
                             (
                                 "心脑血管系统",
-                                new XElement("胸闷", symptom.ChestTightness ? "是" : "否"),
-                                new XElement("胸痛", symptom.ChestPain ? "是" : "否"),
-                                new XElement("心悸", symptom.Palpitations ? "是" : "否"),
-                                new XElement("气短", symptom.BreathHard ? "是" : "否"),
+                                symptom.ChestTightness ? new XElement("胸闷", "是") : null,
+                                symptom.ChestPain ? new XElement("胸痛", "是") : null,
+                                symptom.Palpitations ? new XElement("心悸", "是") : null,
+                                symptom.BreathHard ? new XElement("气短", "是") : null,
                                 symptom.CardiovascularOther ? new XElement
                                 (
                                     "其他",
@@ -148,10 +148,10 @@ namespace WebFoodbornApi.Common
                             new XElement
                             (
                                 "泌尿系统",
-                                new XElement("尿量减少", symptom.ReducedUrineOutput ? "是" : "否"),
-                                new XElement("背部肾区疼痛", symptom.BackKidneyPain ? "是" : "否"),
-                                new XElement("尿中带血", symptom.BloodInTheUrine ? "是" : "否"),
-                                new XElement("肾结石", symptom.KidneyStones ? "是" : "否"),
+                                symptom.ReducedUrineOutput ? new XElement("尿量减少", "是") : null,
+                                symptom.BackKidneyPain ? new XElement("背部肾区疼痛", "是") : null,
+                                symptom.BloodInTheUrine ? new XElement("尿中带血", "是") : null,
+                                symptom.KidneyStones ? new XElement("肾结石", "是") : null,
                                 symptom.UrinaryOther ? new XElement
                                 (
                                     "其他",
@@ -161,27 +161,27 @@ namespace WebFoodbornApi.Common
                             new XElement
                             (
                                 "神经系统",
-                                new XElement("头痛", symptom.Headache ? "是" : "否"),
-                                new XElement("眩晕", symptom.Dizziness ? "是" : "否"),
-                                new XElement("昏迷", symptom.Coma ? "是" : "否"),
-                                new XElement("抽搐", symptom.Convulsion ? "是" : "否"),
-                                new XElement("惊厥", symptom.Horror ? "是" : "否"),
-                                new XElement("谵妄", symptom.Delirium ? "是" : "否"),
-                                new XElement("瘫痪", symptom.Paralysis ? "是" : "否"),
-                                new XElement("言语困难", symptom.DifficultiesInSpeech ? "是" : "否"),
-                                new XElement("吞咽困难", symptom.HardToSwallow ? "是" : "否"),
-                                new XElement("感觉异常", symptom.FeelingAbnormal ? "是" : "否"),
-                                new XElement("精神失常", symptom.MentalDisorder ? "是" : "否"),
-                                new XElement("复视", symptom.Diplopia ? "是" : "否"),
-                                new XElement("视力模糊", symptom.BlurredVision ? "是" : "否"),
-                                new XElement("肢体麻木", symptom.LimbNumbness ? "是" : "否"),
-                                new XElement("末梢感觉障碍", symptom.PeripheralSensoryDisorder ? "是" : "否"),
+                                symptom.Headache ? new XElement("头痛", "是") : null,
+                                symptom.Dizziness ? new XElement("眩晕", "是") : null,
+                                symptom.Coma ? new XElement("昏迷", "是") : null,
+                                symptom.Convulsion ? new XElement("抽搐", "是") : null,
+                                symptom.Horror ? new XElement("惊厥", "是") : null,
+                                symptom.Delirium ? new XElement("谵妄", "是") : null,
+                                symptom.Paralysis ? new XElement("瘫痪", "是") : null,
+                                symptom.DifficultiesInSpeech ? new XElement("言语困难", "是") : null,
+                                symptom.HardToSwallow ? new XElement("吞咽困难", "是") : null,
+                                symptom.FeelingAbnormal ? new XElement("感觉异常", "是") : null,
+                                symptom.MentalDisorder ? new XElement("精神失常", "是") : null,
+                                symptom.Diplopia ? new XElement("复视", "是") : null,
+                                symptom.BlurredVision ? new XElement("视力模糊", "是") : null,
+                                symptom.LimbNumbness ? new XElement("肢体麻木", "是") : null,
+                                symptom.PeripheralSensoryDisorder ? new XElement("末梢感觉障碍", "是") : null,
                                 symptom.PupilAbnormality ? new XElement
                                 (
                                     "瞳孔异常",
                                     new XElement("状态", symptom.PupilStatus)
                                 ) : null,
-                                new XElement("针刺感", symptom.Acupuncture ? "是" : "否"),
+                                symptom.Acupuncture ? new XElement("针刺感", "是") : null,
                                 symptom.Nerveother ? new XElement
                                 (
                                     "其他",
@@ -191,11 +191,11 @@ namespace WebFoodbornApi.Common
                             new XElement
                             (
                                 "皮肤和皮下组织",
-                                new XElement("瘙痒", symptom.Itching ? "是" : "否"),
-                                new XElement("烧灼感", symptom.BurningSensation ? "是" : "否"),
-                                new XElement("皮疹", symptom.Rash ? "是" : "否"),
-                                new XElement("出血点", symptom.BleedingPoint ? "是" : "否"),
-                                new XElement("黄疸", symptom.Jaundice ? "是" : "否"),
+                                symptom.Itching ? new XElement("瘙痒", "是") : null,
+                                symptom.BurningSensation ? new XElement("烧灼感", "是") : null,
+                                symptom.Rash ? new XElement("皮疹", "是") : null,
+                                symptom.BleedingPoint ? new XElement("出血点", "是") : null,
+                                symptom.Jaundice ? new XElement("黄疸", "是") : null,
                                 symptom.SkinOther ? new XElement
                                 (
                                     "其他",
@@ -206,15 +206,14 @@ namespace WebFoodbornApi.Common
                         new XElement
                         (
                             "初步诊断",
-                            new XElement("急性胃肠炎", initialDiagnosis.AcuteGastroenteritis ? "是" : "否"),
-                            new XElement("感染性腹泻", initialDiagnosis.InfectiousDiarrhea ? "是" : "否"),
-                            new XElement("毒蘑菇中毒", initialDiagnosis.PoisonousMushroomPoisoning ? "是" : "否"),
-                            new XElement("菜豆中毒", initialDiagnosis.BeanPoisoning ? "是" : "否"),
-                            new XElement("河豚中毒", initialDiagnosis.PufferfishPoisoning ? "是" : "否"),
-                            new XElement("肉毒中毒", initialDiagnosis.Botulism ? "是" : "否"),
-                            new XElement("亚硝酸盐中毒", initialDiagnosis.NitritePoisoning ? "是" : "否"),
-                            new XElement("横纹肌溶解综合征", initialDiagnosis.RhabdomyolysisSyndrome ? "是" : "否"),
-                            //new XElement("贝类毒素中毒", initialDiagnosis.ShellfishToxinPoisoning ? "是" : "否"),
+                            initialDiagnosis.AcuteGastroenteritis ? new XElement("急性胃肠炎", "是") : null,
+                            initialDiagnosis.InfectiousDiarrhea ? new XElement("感染性腹泻", "是") : null,
+                            initialDiagnosis.PoisonousMushroomPoisoning ? new XElement("毒蘑菇中毒", "是") : null,
+                            initialDiagnosis.BeanPoisoning ? new XElement("菜豆中毒", "是") : null,
+                            initialDiagnosis.PufferfishPoisoning ? new XElement("河豚中毒", "是") : null,
+                            initialDiagnosis.Botulism ? new XElement("肉毒中毒", "是") : null,
+                            initialDiagnosis.NitritePoisoning ? new XElement("亚硝酸盐中毒", "是") : null,
+                            initialDiagnosis.RhabdomyolysisSyndrome ? new XElement("横纹肌溶解综合征", "是") : null,
                             initialDiagnosis.Other ? new XElement
                             (
                                 "其他",
@@ -230,12 +229,12 @@ namespace WebFoodbornApi.Common
                         new XElement
                         (
                             "既往病史",
-                            new XElement("一般消化道炎症", pastMedicalHistory.GeneralGastrointestinalInflammation ? "是" : "否"),
-                            new XElement("克罗恩病", pastMedicalHistory.CrohnsDisease ? "是" : "否"),
-                            new XElement("消化道溃疡", pastMedicalHistory.GastrointestinalUlcer ? "是" : "否"),
-                            new XElement("消化道肿瘤", pastMedicalHistory.GastrointestinalCancer ? "是" : "否"),
-                            new XElement("肠易激综合征", pastMedicalHistory.IrritableBowelSyndrome ? "是" : "否"),
-                            new XElement("脑膜炎脑肿瘤等", pastMedicalHistory.Meningitis ? "是" : "否"),
+                            pastMedicalHistory.GeneralGastrointestinalInflammation ? new XElement("一般消化道炎症", "是") : null,
+                            pastMedicalHistory.CrohnsDisease ? new XElement("克罗恩病", "是") : null,
+                            pastMedicalHistory.GastrointestinalUlcer ? new XElement("消化道溃疡", "是") : null,
+                            pastMedicalHistory.GastrointestinalCancer ? new XElement("消化道肿瘤", "是") : null,
+                            pastMedicalHistory.IrritableBowelSyndrome ? new XElement("肠易激综合征", "是") : null,
+                            pastMedicalHistory.Meningitis ? new XElement("脑膜炎脑肿瘤等", "是") : null,
                             pastMedicalHistory.Other ? new XElement
                             (
                                 "其他",
