@@ -77,6 +77,44 @@ namespace WebFoodbornApi.Controllers
         }
         #endregion
 
+        #region 获得待上传患者列表
+        /// <summary>
+        /// 获取患者列表
+        /// </summary>
+        /// <param name="input">传入参数</param>
+        /// <returns>患者列表</returns>
+        [HttpGet("PendingUpload")]
+        [ProducesResponseType(typeof(List<PatientOutput>), 200)]
+        [ProducesResponseType(typeof(void), 500)]
+        public async Task<IEnumerable<PatientOutput>> GetPendingUploadPatients(PatientQueryInput input)
+        {
+            int pageIndex = input.Page - 1;
+            int Per_Page = input.Per_Page;
+            string sortBy = input.SortBy;
+
+            IQueryable<Patient> query = dbContext.Patients
+                 .AsQueryable();
+
+            query = query.Where(q => string.IsNullOrEmpty(input.PatientName) || q.PatientName.Contains(input.PatientName));
+            query = query.Where(q => string.IsNullOrEmpty(input.OutpatientNo) || q.OutpatientNo.Equals(input.OutpatientNo));
+            query = query.Where(q => q.Status.Equals("正常"));
+            query = query.OrderBy(sortBy);
+
+            var totalCount = query.Count();
+            var totalPages = (int)Math.Ceiling((double)totalCount / Per_Page);
+
+            HttpContext.Response.Headers.Add("X-TotalCount", JsonConvert.SerializeObject(totalCount));
+            HttpContext.Response.Headers.Add("X-TotalPage", JsonConvert.SerializeObject(totalPages));
+
+            query = query.Skip(pageIndex * Per_Page).Take(Per_Page);
+
+            List<Patient> patients = await query.ToListAsync();
+            List<PatientOutput> list = mapper.Map<List<PatientOutput>>(patients);
+
+            return list;
+        }
+        #endregion
+
         #region 获得患者信息
         /// <summary>
         /// 获得用户信息
