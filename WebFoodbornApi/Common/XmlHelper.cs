@@ -108,7 +108,7 @@ namespace WebFoodbornApi.Common
                                 symptom.StomachAche ? new XElement("腹痛", "是") : null,
                                 symptom.Diarrhea ? new XElement
                                 (
-                                    "腹泻性状",
+                                    "腹泻",
                                     new XElement("性状", symptom.DiarrheaTraits),
                                     new XElement("次数", symptom.DiarrheaCount)
                                 ) : null,
@@ -173,8 +173,8 @@ namespace WebFoodbornApi.Common
                                 symptom.FeelingAbnormal ? new XElement("感觉异常", "是") : null,
                                 symptom.MentalDisorder ? new XElement("精神失常", "是") : null,
                                 symptom.Diplopia ? new XElement("复视", "是") : null,
-                                symptom.BlurredVision ? new XElement("视力模糊", "是") : null,
-                                symptom.LimbNumbness ? new XElement("肢体麻木", "是") : null,
+                                symptom.BlurredVision ? new XElement("视物模糊", "是") : null,
+                                symptom.LimbNumbness ? new XElement("麻木", "是") : null,
                                 symptom.PeripheralSensoryDisorder ? new XElement("末梢感觉障碍", "是") : null,
                                 symptom.PupilAbnormality ? new XElement
                                 (
@@ -205,7 +205,7 @@ namespace WebFoodbornApi.Common
                         ),
                         new XElement
                         (
-                            "初步诊断",
+                            "诊断结论",
                             initialDiagnosis.AcuteGastroenteritis ? new XElement("急性胃肠炎", "是") : null,
                             initialDiagnosis.InfectiousDiarrhea ? new XElement("感染性腹泻", "是") : null,
                             initialDiagnosis.PoisonousMushroomPoisoning ? new XElement("毒蘑菇中毒", "是") : null,
